@@ -29,7 +29,7 @@ deploy:
   draft: false
   prerelease: false
   autho_token:
-    secure: iHsRUqwGf/Zh7OuYpHOWQL8buaOL+c8/6kXLRly8V2j0LCUo7CcDs0NxQ0vl2bhZ
+    secure: n/6tPQTfPM4mmdEiqQs3zeG+Cv0zcqkGZy//a+bF2SLB0LUiGWpj2z00RI9KOepO
   on:
     branch: master
     appveyor_repo_tag: true

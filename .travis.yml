@@ -19,13 +19,12 @@ DEPLOY_TO_GITHUB: &DEPLOY_TO_GITHUB
   deploy:
     provider: releases
     api_key:
-      secure: fx0rR5Ii1KcsydexE6QpkDbqItNdj3Lt6L5yFZaKKB/ejw9M555NkXA+0GZqV0sLZ54qfR8zTaXAf6eBFKgcG9etaCl7vTXqsvDrlssth82oki1zufP39uuoOy4WgFq8OfACOtUq7opDAgYmpaGzlFiny+c5j7asGwDtAU1Fc3JeJsvAnxHKg9+0spXFD6kBQd5CWpqDXv2rLFK0b8IM2fHAzd0PiJZQWqz//2Cj/r9rTiewtIzqigctAfOgFwYoQvfdM+0mKb4pefG+zXEGfxxQr4r5hqZ6UMO7hto3Jnm9LRjNR8dNaDQCqQ0bkdLTAMTC3nV/gZPM679yQU3KHueVjg9pleNzuKnuBgYmH9+BrlG1dW68kqA+6Xh+wIJYrLuagWhJDlCtiU6PM5QAbFg3mabPIBG3M2IHTrOVATme+iW5vpROARhgjbQEF235DyvZaT+Tml3+PY+PfcRax2DVUhvGQViv4tzppbT0PjjBlEbGct49cFLGdqZIJBiVrYW24I2QkENTnUgZsFIBuJlVCBHZwZlLo9ldVvu4XTMKw65z42zoTzobjtbC1QPEZPiaJXSxC7W569fqL/ORXwGToFk6rQjXwEqDP2okGiusR75LXrZD6qFibNpqeypRFtqOzntsOfTUGrlaN1yTt/6dz0V0j9uI7a9/CHVcblI=
+      secure: "dqaZeylZi0oGXLkn/ONxzLs6o4RO1nihJek2Kjbyald2mQbnQM4EgHCjGAV17xRy5ljH9OmhByU3yMqpTcBWTmwWkFScFWb82bXm8UCKb1DlJDmjUvFNNRLC/LpWMaTQnNLMa1Q6H0RelQHmdRLoPsYuFqxc9iWMcMMx0pPXVzrVMGspDV4JIQazB3kPGPeE0zG100Ze5W1lPdcxg8nlr1/Y/qB7NI0hsXxNv4FgC67hIC4UKOZodOYBJHCe4xFD3MMy9OlrK4KMV6Eiwi6bWLi+Zxfl6DQlqUDWWwLgXoW6foNoB5j46tM9OnjKCxtrmBCMSk6waqoWHBeRFcomVSjFIudy6F7o+Zr4+27v6okdtOaXEHxESOK08Ha8pbGIwUUM3tTnIxFkGuxOzdGmSu6ZiU5stiYd2sQoieuMXwmQJx/6J9AK/AGIJg00PjX5fDu8ZZRgZMDyVKDa4YgRB2jYNS4r03LFy3qspYwbYPfruI9j0fPbltn/IJ9eMxbVm4YFzUlUZjgYw5o7AX3Nurmqs6YgizLBrJEFHJPWUSJ47OQ8yXaV+blnH19jFGwl1twrRNwBbotPeyHz6sj9NLJ6tqDkD9mfgbLIiNrQqAJPoa/SG+gd9wFxvOK859vKJ4CV6CtIFkR3+TtkJ/4aJxpAQaP37pTKWkOMAE+lFMY="
     file_glob: true
     file: wasm-pack-$TRAVIS_TAG-$TARGET.tar.gz
     skip_cleanup: true
     on:
       branch: master
-      condition: $DEPLOY = 1
       tags: true
 
 matrix:
@@ -59,7 +58,7 @@ matrix:
         branch: master
 
   # dist linux binary
-  - env: JOB=dist-linux TARGET=x86_64-unknown-linux-musl DEPLOY=1
+  - env: JOB=dist-linux TARGET=x86_64-unknown-linux-musl
     rust: nightly
     before_script: rustup target add $TARGET
     script: cargo build --release --target $TARGET --locked --features vendored-openssl
@@ -70,7 +69,7 @@ matrix:
     <<: *DEPLOY_TO_GITHUB
 
   # dist OSX binary
-  - env: JOB=dist-osx MACOSX_DEPLOYMENT_TARGET=10.7 DEPLOY=1 TARGET=x86_64-apple-darwin
+  - env: JOB=dist-osx MACOSX_DEPLOYMENT_TARGET=10.7 TARGET=x86_64-apple-darwin
     os: osx
     rust: nightly
     script: cargo build --release --target $TARGET --locked

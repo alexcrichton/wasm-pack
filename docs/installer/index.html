@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <title>wasm-pack</title>
+</head>
+
+<body>
+
+<div id="platform-instructions-unix" style="display: none;">
+  <pre>CURL | SH CMD</pre>
+  <p>
+    You appear to be running Unix. If not,
+    <a class="default-platform-button" href="#">display all supported installers</a>.
+  </p>
+</div>
+
+<div id="platform-instructions-win64" class="instructions" style="display: none;">
+  <p>
+    <a href="THE LINK">THE LINK</a>
+  </p>
+  <p>
+    If you're a Windows Subsystem for Linux user run the following in your
+    terminal, then follow the onscreen instructions to install wasm-pack.
+  </p>
+  <pre>CURL | SH CMD</pre>
+  <p>
+    You appear to be running Windows 64-bit. If not,
+    <a class="default-platform-button" href="#">
+      display all supported installers
+    </a>.
+  </p>
+</div>
+
+<div id="platform-instructions-unknown" class="instructions" style="display: none;">
+  <p>I don't recognize your platform.</p>
+  <p>
+    <!--rustup runs on Windows, Linux, Mac OS X, FreeBSD and NetBSD. If
+    you are on one of these platforms and are seeing this then please
+    <a href="https://github.com/rust-lang-nursery/rustup.rs/issues/new">report an issue</a>,
+    along with the following values:-->
+    BUG REPORT INSTRUCTIONS HERE
+  </p>
+
+  <div>
+    <div>navigator.platform:</div>
+    <div id="nav-plat"></div>
+    <div>navigator.appVersion:</div>
+    <div id="nav-app"></div>
+  </div>
+</div>
+
+<div id="platform-instructions-default" class="instructions">
+  <div>
+    <p>
+      To install wasm-pack, if you are running Unix,<br/>run the following in
+      your terminal, then follow the onscreen instructions.
+    </p>
+    <pre>CURL | SH CMD</pre>
+  </div>
+
+  <hr/>
+
+  <div>
+    <p>
+      If you are running Windows 64-bit,<br/>download and run
+      <a href="THE LINK">THE LINK</a>
+      then follow the onscreen instructions.
+    </p>
+  </div>
+
+  <hr/>
+
+  <div>
+    <p>
+      For all other platforms, run the following in your terminal:
+    </p>
+    <pre>cargo install wasm-pack</pre>
+  </div>
+</div>
+
+<script type="text/javascript" src="wasm-pack.js"></script>

@@ -24,7 +24,7 @@ fn fixup(input: &str) -> String {
     let version = manifest.lines()
         .find(|line| line.starts_with("version ="))
         .unwrap();
-    let version = &version[version.find('"').unwrap() + 1..version.len() - 1];
+    let version = &version[version.find('"').unwrap() + 1..version.rfind('"').unwrap()];
 
     input.replace("$VERSION", &format!("v{}", version))
 }

@@ -3,12 +3,32 @@
 <head>
   <meta charset="utf-8">
   <title>wasm-pack</title>
+  <style>
+    body {
+      text-align: center;
+      margin: 100px;
+      font-size: 150%;
+    }
+    #main {
+      padding: 100px;
+    }
+    .instructions {
+      padding: 100px;
+      border: 1px solid black;
+    }
+    .winlink {
+      display: block;
+    }
+  </style>
 </head>
-
 <body>
 
+<div id='main'>
+  Install wasm-pack! A tool with a blurb here.
+</div>
+
 <div id="platform-instructions-unix" style="display: none;">
-  <pre>curl https://alexcrichton.github.io/wasm-pack/wasm-pack-init.sh -sSf | sh</pre>
+  <pre>curl https://alexcrichton.github.io/wasm-pack/installer/init.sh -sSf | sh</pre>
   <p>
     You appear to be running Unix. If not,
     <a class="default-platform-button" href="#">display all supported installers</a>.
@@ -18,15 +38,17 @@
 <div id="platform-instructions-win64" class="instructions" style="display: none;">
   <p>
     You appear to be running windows 64-bit, download and run
-    <a href="https://github.com/alexcrichton/wasm-pack/releases/download/$VERSION/wasm-pack-$VERSION-x86_64-pc-windows-msvc.exe">wasm-pack-init.exe</a>,
+    <a class='winlink' href="https://github.com/alexcrichton/wasm-pack/releases/download/$VERSION/wasm-pack-init.exe">wasm-pack-init.exe</a>
     then follow the onscreen
     instructions.
   </p>
+  <hr/>
   <p>
     If you're a Windows Subsystem for Linux user run the following in your
     terminal, then follow the onscreen instructions to install wasm-pack.
   </p>
-  <pre>curl https://alexcrichton.github.io/wasm-pack/wasm-pack-init.sh -sSf | sh</pre>
+  <pre>curl https://alexcrichton.github.io/wasm-pack/installer/init.sh -sSf | sh</pre>
+  <hr/>
   <p>
     You appear to be running Windows 64-bit. If not,
     <a class="default-platform-button" href="#">
@@ -58,7 +80,7 @@
       run the following in your terminal, then follow the onscreen
       instructions.
     </p>
-    <pre>curl https://alexcrichton.github.io/wasm-pack/wasm-pack-init.sh -sSf | sh</pre>
+    <pre>curl https://alexcrichton.github.io/wasm-pack/installer/init.sh -sSf | sh</pre>
   </div>
 
   <hr/>
@@ -66,7 +88,7 @@
   <div>
     <p>
       If you are running Windows 64-bit,<br/>download and run
-      <a href="https://github.com/alexcrichton/wasm-pack/releases/download/$VERSION/wasm-pack-$VERSION-x86_64-pc-windows-msvc.exe">wasm-pack-init.exe</a>,
+      <a class='winlink' href="https://github.com/alexcrichton/wasm-pack/releases/download/$VERSION/wasm-pack-init.exe">wasm-pack-init.exe</a>
       then follow the onscreen instructions.
     </p>
   </div>

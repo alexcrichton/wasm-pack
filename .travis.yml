@@ -49,8 +49,8 @@ matrix:
     - cargo install-update -a
     script:
     - (cd docs && mdbook build)
-    - cp -r docs/installer docs/book
-    - cp docs/wasm-pack-init.sh docs/book
+    - rustc ./docs/build-installer.rs
+    - ./build-installer
     deploy:
       provider: pages
       skip-cleanup: true

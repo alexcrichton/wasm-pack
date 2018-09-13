@@ -15,7 +15,7 @@
 
 set -u
 
-UPDATE_ROOT="https://github.com/rustwasm/wasm-pack/releases/download/$VERSION"
+UPDATE_ROOT="https://github.com/alexcrichton/wasm-pack/releases/download/$VERSION"
 
 main() {
     downloader --check

@@ -1,0 +1,474 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Hello wasm-pack!</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="prerequisites/index.html"><strong aria-hidden="true">1.</strong> Prerequisites</a></li><li><ol class="section"><li><a href="prerequisites/rust.html"><strong aria-hidden="true">1.1.</strong> Rust</a></li><li><a href="prerequisites/npm.html"><strong aria-hidden="true">1.2.</strong> npm</a></li></ol></li><li><a href="getting-started/index.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><ol class="section"><li><a href="getting-started/installation.html"><strong aria-hidden="true">2.1.</strong> Installation</a></li><li><a href="getting-started/project-setup/index.html"><strong aria-hidden="true">2.2.</strong> Project Setup</a></li><li><ol class="section"><li><a href="getting-started/project-setup/using-a-template.html"><strong aria-hidden="true">2.2.1.</strong> Using a Template</a></li><li><a href="getting-started/project-setup/manual-setup.html"><strong aria-hidden="true">2.2.2.</strong> Manual Setup</a></li></ol></li></ol></li><li><a href="commands/index.html"><strong aria-hidden="true">3.</strong> Commands</a></li><li><ol class="section"><li><a href="commands/init.html"><strong aria-hidden="true">3.1.</strong> init (DEPRECATED)</a></li><li><a href="commands/build.html"><strong aria-hidden="true">3.2.</strong> build</a></li><li><a href="command/pack-and-publish.html"><strong aria-hidden="true">3.3.</strong> pack and publish</a></li></ol></li><li><a href="tutorial/index.html"><strong aria-hidden="true">4.</strong> Tutorial</a></li><li><ol class="section"><li><a href="tutorial/writing-a-rust-webassembly-library.html"><strong aria-hidden="true">4.1.</strong> Writing a Rust-WebAssembly Library</a></li><li><a href="tutorial/packaging-and-publishing.html"><strong aria-hidden="true">4.2.</strong> Packaging and Publishing</a></li><li><a href="tutorial/using-your-library.html"><strong aria-hidden="true">4.3.</strong> Using your Library</a></li></ol></li><li><a href="contributing.html"><strong aria-hidden="true">5.</strong> Contributing</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Hello wasm-pack!</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#prerequisites" id="prerequisites"><h1>Prerequisites</h1></a>
+<p>To run <code>wasm-pack</code> you'll need to have both Rust and npm installed and configured.</p>
+<ul>
+<li><a href="/prerequisites/rust.html">Rust</a></li>
+<li><a href="/prerequisites/npm.html">npm</a></li>
+</ul>
+<a class="header" href="#rust" id="rust"><h1>Rust</h1></a>
+<p><code>wasm-pack</code> is a tool written in Rust, and distributed with <code>cargo</code>. As a result,
+you'll need Rust and <code>cargo</code> to use <code>wasm-pack</code>.</p>
+<p>To install Rust, visit this <a href="https://www.rust-lang.org/en-US/install.html">page</a>.</p>
+<p>You can be sure you have Rust and Cargo installed by running:</p>
+<pre><code>rustc --version
+cargo --version
+</code></pre>
+<a class="header" href="#nightly-rust" id="nightly-rust"><h3><code>nightly</code> Rust</h3></a>
+<p><code>wasm-pack</code> depends on <code>wasm-bindgen</code> which currently requires Rust features that
+have not yet been stabilized. As a result, you'll need to use a nightly version of
+Rust to run <code>wasm-pack</code>.</p>
+<p>You can install the nightly channel by running:</p>
+<pre><code>rustup install nightly
+</code></pre>
+<p>You can configure rustup to always use <code>nightly</code> in a directory by running:</p>
+<pre><code>rustup override set nightly
+</code></pre>
+<a class="header" href="#npm" id="npm"><h1>npm</h1></a>
+<p>Currently, <code>wasm-pack</code> requires that you have npm installed to pack and publish your
+package. Longterm, this will be replaced by a Rust only version.</p>
+<p>If you would rather use another package manager that interfaces with the npm registry
+you may, however, the <code>pack</code> and <code>publish</code> commands depend on having npm installed.</p>
+<p>You can install [npm] by following <a href="https://www.npmjs.com/get-npm">these instructions</a>.</p>
+<a class="header" href="#npm-account" id="npm-account"><h3>npm Account</h3></a>
+<p>Regardless of which package manager CLI tool you'l like to you, if you wish to publish
+your package to the npm registry, or another npm-like registry, you'll need an npm
+account.</p>
+<p>You can find information about signing up for npm <a href="https://www.npmjs.com/signup">here</a>.</p>
+<a class="header" href="#getting-started" id="getting-started"><h1>Getting Started</h1></a>
+<p>In this section, we'll teach you how to get <code>wasm-pack</code> installed and how to setup a project
+to use <code>wasm-pack</code> with.</p>
+<ul>
+<li><a href="/getting-started/installation.html">Installation</a></li>
+<li><a href="/getting-started/project-setup/index.html">Project Setup</a></li>
+</ul>
+<a class="header" href="#installation" id="installation"><h2>Installation</h2></a>
+<p>You can install <code>wasm-pack</code> using the following command:</p>
+<pre><code>cargo install wasm-pack
+</code></pre>
+<p>If you have already installed <code>wasm-pack</code> and want to install a newer version,
+you can use the <code>--force</code> option, like this:</p>
+<pre><code>cargo install wasm-pack --force
+</code></pre>
+<a class="header" href="#project-setup" id="project-setup"><h1>Project Setup</h1></a>
+<p>There are a few things you need to do to setup a project for <code>wasm-pack</code>.
+We strongly recommending <a href="/getting-started/project-setup/using-a-template.html">using a template</a>, but you can also set the project
+up <a href="/getting-started/project-setup/manual-setup.html">manually</a>.</p>
+<a class="header" href="#using-a-template" id="using-a-template"><h1>Using a Template</h1></a>
+<p>You can create a new Rust-WebAssembly project by using the <a href="https://github.com/rustwasm/wasm-pack-template">rustwasm wasm-pack-template</a>.</p>
+<p>To so do, you'll need the <code>cargo-generate</code> tool. To install <code>cargo-generate</code>:</p>
+<pre><code>cargo install cargo-generate
+</code></pre>
+<p>Then run:</p>
+<pre><code>cargo generate --git https://github.com/rustwasm/wasm-pack-template
+</code></pre>
+<p>You will be prompted to give your project a name. Once you do, you will have a directory
+with a new project, ready to go.</p>
+<a class="header" href="#manual-setup" id="manual-setup"><h1>Manual Setup</h1></a>
+<p>You can create a new Rust project named <code>my-lib</code> using this command.</p>
+<pre><code>cargo new --lib my-lib
+</code></pre>
+<p>The <code>--lib</code> flag specifies that the project is a library, which is important
+because we will be calling this code from JavaScript.</p>
+<a class="header" href="#cargotoml-changes" id="cargotoml-changes"><h4>Cargo.toml changes</h4></a>
+<p>You will need to add <code>wasm-bindgen</code> to your <code>Cargo.toml</code> in the dependencies
+section. <code>wasm-bindgen</code> is a tool that facilitates interoperability between
+wasm modules and JavaScript.</p>
+<p>Next, add a <code>[lib]</code> section, with a new field named <code>crate-type</code> set to
+<code>&quot;cdylib&quot;</code>. This specifies that the library is a C compatible dynamic library,
+which helps <code>cargo</code> pass the correct flags to the Rust compiler when targeting
+<code>wasm32</code>.</p>
+<p>After making these changes, your <code>Cargo.toml</code> file should look something like
+this:</p>
+<pre><code>[package]
+name = &quot;wasm-add&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;Michael Gattozzi &lt;mgattozzi@gmail.com&gt;&quot;]
+description = &quot;Code used to demonstrate how to use wasm-pack&quot;
+license = &quot;MIT/Apache-2.0&quot;
+repository = &quot;https://github.com/mgattozzi/wasm-add&quot;
+
+[lib]
+crate-type = [&quot;cdylib&quot;]
+
+[dependencies]
+wasm-bindgen=&quot;0.2&quot;
+</code></pre>
+<a class="header" href="#commands" id="commands"><h1>Commands</h1></a>
+<p><code>wasm-pack</code> has several commands to help you during the process of building
+a Rust-generated WebAssembly project.</p>
+<ul>
+<li><code>init</code>: This command has been deprecated in favor of <code>build</code>.</li>
+<li><code>build</code>: This command builds a <code>pkg</code> directory for you with compiled wasm and generated JS. <a href="/commands/build.html">Learn more</a></li>
+<li><code>pack</code> and <code>publish</code>: These command will create a tarball, and optionally publish it to a registry, such as npm. <a href="/commands/pack-and-publish.html">Learn more</a></li>
+</ul>
+<a class="header" href="#wasm-pack-init-deprecated" id="wasm-pack-init-deprecated"><h1>wasm-pack init (DEPRECATED)</h1></a>
+<p>This command has been deprecated in favor of <code>build</code>, which does the same thing, but is
+a much more representative name for the command. <a href="/commands/build.html">Read the docs for <code>build</code>.</a></p>
+<a class="header" href="#wasm-pack-build" id="wasm-pack-build"><h1>wasm-pack build</h1></a>
+<p>The <code>wasm-pack build</code> command creates the files neccessary for JavaScript
+interoperability and for publishing a package to npm. This involves compiling
+your code to wasm and generating a pkg folder. This pkg folder will contain the
+wasm binary, a JS wrapper file, your <code>README</code>, and a <code>package.json</code> file.</p>
+<a class="header" href="#path" id="path"><h2>Path</h2></a>
+<p>The <code>wasm-pack build</code> command can be given an optional path argument, e.g.:</p>
+<pre><code>wasm-pack build examples/js-hello-world
+</code></pre>
+<p>This path should point to a directory that contains a <code>Cargo.toml</code> file. If no
+path is given, the <code>build</code> command will run in the current directory.</p>
+<a class="header" href="#debug" id="debug"><h2>Debug</h2></a>
+<p>The init command accepts an optional <code>--debug</code> argument. This will build the
+output package using cargo's
+<a href="https://doc.rust-lang.org/cargo/reference/manifest.html#the-profile-sections">default non-release profile</a>. Building
+this way is faster but applies few optimizations to the output, and enables
+debug assertions and other runtime correctness checks.</p>
+<p>The exact meaning of this flag may evolve as the platform matures.</p>
+<a class="header" href="#target" id="target"><h2>Target</h2></a>
+<p>The <code>build</code> command accepts a <code>--target</code> argument. This will customize the output files
+to align with a particular type of JS module. This allows wasm-pack to generate either
+ES6 modules or CommonJS modules for use in browser and in NodeJS. Defaults to <code>browser</code>.
+The options are:</p>
+<pre><code>wasm-pack build --target nodejs
+</code></pre>
+<table><thead><tr><th> Option    </th><th> Description                                                                                                     </th></tr></thead><tbody>
+<tr><td> <code>nodejs</code>  </td><td> Outputs JS that uses CommonJS modules, for use with a <code>require</code> statement.                                      </td></tr>
+<tr><td> <code>browser</code> </td><td> Outputs JS that uses ES6 modules, primarily for use with <code>import</code> statements and/or bundlers such as <code>webpack</code>. </td></tr>
+</tbody></table>
+<a class="header" href="#scope" id="scope"><h2>Scope</h2></a>
+<p>The init command also accepts an optional <code>--scope</code> argument. This will scope
+your package name, which is useful if your package name might conflict with
+something in the public registry. For example:</p>
+<pre><code>wasm-pack build examples/js-hello-world --scope test
+</code></pre>
+<p>This command would create a <code>package.json</code> file for a package called
+<code>@test/js-hello-world</code>. For more information about scoping, you can refer to
+the npm documentation <a href="https://docs.npmjs.com/misc/scope">here</a>.</p>
+<a class="header" href="#mode" id="mode"><h2>Mode</h2></a>
+<p>The <code>build</code> command accepts an optional <code>--mode</code> argument.</p>
+<pre><code>wasm-pack build examples/js-hello-world --mode no-install
+</code></pre>
+<table><thead><tr><th> Option        </th><th> Description                                                                              </th></tr></thead><tbody>
+<tr><td> <code>no-install</code>  </td><td> <code>wasm-pack init</code> implicitly and create wasm binding  without installing <code>wasm-bindgen</code>.  </td></tr>
+<tr><td> <code>normal</code>      </td><td> do all the stuffs of <code>no-install</code> with installed <code>wasm-bindgen</code>.                         </td></tr>
+</tbody></table>
+<a class="header" href="#pack-and-publish" id="pack-and-publish"><h1>pack and publish</h1></a>
+<a class="header" href="#tutorial" id="tutorial"><h1>Tutorial</h1></a>
+<p>The goal of this tutorial is to introduce you to the <code>wasm-pack</code> workflow.</p>
+<p>This tutorial is aimed at folks who are both beginners to WebAssembly and Rust- you don't need
+much Rust knowledge to complete this tutorial.</p>
+<p>Be sure to have done the following before starting:</p>
+<ol>
+<li>Read and install all the <a href="/prerequisites.html">Prerequisites</a>.</li>
+<li><a href="/getting-started/installation.html">Install <code>wasm-pack</code></a>.</li>
+<li><a href="/getting-started/project-setup/using-a-template.html">Setup a new project</a>.</li>
+</ol>
+<a class="header" href="#writing-a-rust-webassembly-library" id="writing-a-rust-webassembly-library"><h1>Writing a Rust-WebAssembly Library</h1></a>
+<a class="header" href="#package-code-for-npm" id="package-code-for-npm"><h1>Package Code for npm</h1></a>
+<p>We've made our code so now we need to package it all up. In your project directory run the following
+command:</p>
+<pre><code class="language-bash">$ wasm-pack init --scope MYSCOPE
+</code></pre>
+<p>where <code>MYSCOPE</code> is your npm username. Normally you could just type <code>wasm-pack init</code> but since
+other people are doing this tutorial as well we don't want conflicts with the <code>wasm-add</code> package
+name! This command when run does a few things:</p>
+<ol>
+<li>It'll compile your code to wasm if you haven't already</li>
+<li>It'll generate a pkg folder with the wasm file, a JS wrapper file around the wasm, your README,
+and a <code>package.json</code> file.</li>
+</ol>
+<p>This is everything you need to upload your code to npm! Let's do just that!</p>
+<p>First off you'll need to login to npm with the account you made earlier if you didn't already have
+one:</p>
+<pre><code class="language-bash">$ npm login
+</code></pre>
+<p>Next you'll need to go into the <code>pkg</code> directory and actually upload the package:</p>
+<pre><code class="language-bash">$ cd pkg
+$ npm publish --access=public
+</code></pre>
+<p>Now normally if things are not scoped you can just do <code>npm publish</code> but if you give it a scope
+you'll need to tell npm that this is actually public so it can publish it. We need to do that here
+since we gave our packages a scope to avoid conflicting with each other! Next up is actually running
+the code and verifying we got it from npm and how we can use that code.</p>
+<a class="header" href="#run-the-code-from-npm" id="run-the-code-from-npm"><h1>Run The Code From npm</h1></a>
+<p>Alright let's make a new small directory to test that we can now run this code and pull it from npm.</p>
+<pre><code class="language-bash">$ mkdir test
+$ cd test
+</code></pre>
+<p>Now we need to create a <code>package.json</code> file that looks like this:</p>
+<pre><code class="language-json">{
+  &quot;scripts&quot;: {
+    &quot;serve&quot;: &quot;webpack-dev-server&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;@MYSCOPE/wasm-add&quot;: &quot;^0.1.0&quot;
+  },
+  &quot;devDependencies&quot;: {
+    &quot;webpack&quot;: &quot;^4.0.1&quot;,
+    &quot;webpack-cli&quot;: &quot;^2.0.10&quot;,
+    &quot;webpack-dev-server&quot;: &quot;^3.1.0&quot;
+  }
+}
+</code></pre>
+<p>where <code>MYSCOPE</code> is your npm username. You can expand this to be a more complete file but
+we're really just trying to verify that this works!</p>
+<p>Next up we'll need to create a small webpack configuration so that we can use the
+<code>webpack-dev-server</code> to serve the wasm file properly. It should be noted that webpack isn't
+a requirement. It's just what was chosen for this tutorial. You just need something to server the
+code! Here's what your <code>webpack.config.js</code> should look like:</p>
+<pre><code class="language-javascript">const path = require('path');
+module.exports = {
+  entry: &quot;./index.js&quot;,
+  output: {
+    path: path.resolve(__dirname, &quot;dist&quot;),
+    filename: &quot;index.js&quot;,
+  },
+  mode: &quot;development&quot;
+};
+</code></pre>
+<p>This tells webpack that if it's going to start things up use <code>index.js</code>. Before we do that though
+we'll need to setup a small html file. Create a new file called <code>index.html</code> and put this inside it:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;wasm-pack example&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script src=&quot;./index.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>We're almost set. Now we need to setup our JS file so that we can run some wasm code!
+Make a file called <code>index.js</code> and put this inside of it:</p>
+<pre><code class="language-javascript">const js = import(&quot;@MYSCOPE/wasm-add/wasm_add.js&quot;);
+js.then(js =&gt; {
+  js.alert_add(3,2);
+});
+</code></pre>
+<p>Since web pack <a href="https://github.com/webpack/webpack/issues/6615">can't load wasm synchronously yet</a>
+we are using the import statement above followed
+by the promise in order to load it properly. This is what lets us then call <code>alert_add</code>. We're
+importing from the <code>node_module</code> folder we haven't gotten yet so let's import all of our
+dependencies finally and run the example!</p>
+<pre><code class="language-bash">$ npm install
+$ npm run serve
+</code></pre>
+<p>Then in a web browser navigate to <code>http://localhost:8080</code> you should see something like this:</p>
+<p><img src="./wasm-pack/wasm-pack.png" alt="An alert box saying &quot;Hello from Rust! 3 + 2 = 5&quot;" /></p>
+<p>If you did congrats you've successfully uploaded your first bit of wasm code to npm and used it
+properly!</p>
+<a class="header" href="#contributing" id="contributing"><h1>Contributing</h1></a>
+<a class="header" href="#prerequisites-1" id="prerequisites-1"><h2>Prerequisites</h2></a>
+<p>The technical prerequisites for contributing to this project are the same as for
+using it. You can find them documented <a href="docs/prerequisites.html">here</a>.</p>
+<p>You'll also want to check out the contributing <a href="CONTRIBUTING.html">guidelines</a>.</p>
+<a class="header" href="#a-up-and-running" id="a-up-and-running"><h2>🏃‍♀️ Up and Running</h2></a>
+<ol>
+<li>fork and clone this repository</li>
+<li>install [node/npm]</li>
+<li><code>cd wasm-pack</code></li>
+<li><code>cargo run</code>. To test command line arguments you can run <code>cargo run -- &lt;args&gt;</code>.</li>
+</ol>
+<a class="header" href="#documentation" id="documentation"><h2>Documentation</h2></a>
+<p>Documentation lives in the <a href="docs"><code>/docs</code></a> directory. Each command has it's own page.
+Additionally there are extra pages explaining the prerequisites, setup, and how to
+contribute (which you are reading now!).</p>
+<a class="header" href="#tests" id="tests"><h2>Tests</h2></a>
+<p>Tests live in the <a href="tests"><code>/tests</code></a> directory. To run the tests you can run:</p>
+<pre><code>cargo  test
+</code></pre>
+<p>You can also manually test the CLI tool by running:</p>
+<pre><code>cargo run -- &lt;args&gt;
+</code></pre>
+<p>...for example:</p>
+<pre><code>cargo run -- init /tests/fixtures/js-hello-world --scope=ag_dubs
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

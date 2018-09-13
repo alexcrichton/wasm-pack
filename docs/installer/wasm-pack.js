@@ -59,7 +59,8 @@ function adjust_for_platform() {
     platforms.forEach(function (platform_elem) {
         var platform_div = document.getElementById("platform-instructions-" + platform_elem);
         platform_div.style.display = "none";
-        if (platform == platform_elem) {
+        if (platform == platform_elem ||
+            (platform == 'unknown' && platform_elem == 'default')) {
             platform_div.style.display = "block";
         }
     });

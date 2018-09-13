@@ -25,7 +25,7 @@ DEPLOY_TO_GITHUB: &DEPLOY_TO_GITHUB
     file: wasm-pack-$TRAVIS_TAG-$TARGET.tar.gz
     skip_cleanup: true
     on:
-      branch: master
+      branch: installer
       tags: true
 
 matrix:
@@ -48,7 +48,9 @@ matrix:
     - (test -x $HOME/.cargo/bin/mdbook || cargo install --vers "^0.1" mdbook)
     - cargo install-update -a
     script:
-    - cd docs && mdbook build
+    - (cd docs && mdbook build)
+    - cp -r docs/installer docs/book
+    - cp docs/wasm-pack-init.sh docs/book
     deploy:
       provider: pages
       skip-cleanup: true
@@ -57,6 +59,7 @@ matrix:
       keep-history: false
       on:
         branch: master
+        tags: true
 
   # dist linux binary
   - env: JOB=dist-linux TARGET=x86_64-unknown-linux-musl

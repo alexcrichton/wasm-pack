@@ -8,7 +8,7 @@
 <body>
 
 <div id="platform-instructions-unix" style="display: none;">
-  <pre>CURL | SH CMD</pre>
+  <pre>curl https://rustwasm.github.io/wasm-pack/wasm-pack-init.sh -sSf | sh</pre>
   <p>
     You appear to be running Unix. If not,
     <a class="default-platform-button" href="#">display all supported installers</a>.
@@ -17,13 +17,16 @@
 
 <div id="platform-instructions-win64" class="instructions" style="display: none;">
   <p>
-    <a href="THE LINK">THE LINK</a>
+    You appear to be running windows 64-bit, download and run
+    <a href="https://github.com/alexcrichton/wasm-pack/releases/download/alex-test/wasm-pack-alex-test-x86_64-pc-windows-msvc.ex">wasm-pack-init.exe</a>,
+    then follow the onscreen
+    instructions.
   </p>
   <p>
     If you're a Windows Subsystem for Linux user run the following in your
     terminal, then follow the onscreen instructions to install wasm-pack.
   </p>
-  <pre>CURL | SH CMD</pre>
+  <pre>curl https://rustwasm.github.io/wasm-pack/wasm-pack-init.sh -sSf | sh</pre>
   <p>
     You appear to be running Windows 64-bit. If not,
     <a class="default-platform-button" href="#">
@@ -35,11 +38,9 @@
 <div id="platform-instructions-unknown" class="instructions" style="display: none;">
   <p>I don't recognize your platform.</p>
   <p>
-    <!--rustup runs on Windows, Linux, Mac OS X, FreeBSD and NetBSD. If
-    you are on one of these platforms and are seeing this then please
-    <a href="https://github.com/rust-lang-nursery/rustup.rs/issues/new">report an issue</a>,
-    along with the following values:-->
-    BUG REPORT INSTRUCTIONS HERE
+    We would appreciate it if you
+    <a href="https://github.com/rustwasm/wasm-pack/issues/new">reported an issue</a>,
+    along with the following values:
   </p>
 
   <div>
@@ -56,7 +57,7 @@
       To install wasm-pack, if you are running Unix,<br/>run the following in
       your terminal, then follow the onscreen instructions.
     </p>
-    <pre>CURL | SH CMD</pre>
+    <pre>curl https://rustwasm.github.io/wasm-pack/wasm-pack-init.sh -sSf | sh</pre>
   </div>
 
   <hr/>
@@ -64,7 +65,7 @@
   <div>
     <p>
       If you are running Windows 64-bit,<br/>download and run
-      <a href="THE LINK">THE LINK</a>
+      <a href="https://github.com/alexcrichton/wasm-pack/releases/download/alex-test/wasm-pack-alex-test-x86_64-pc-windows-msvc.ex">wasm-pack-init.exe</a>,
       then follow the onscreen instructions.
     </p>
   </div>

@@ -19,14 +19,14 @@ before_deploy:
         $NAME = "wasm-pack-${env:APPVEYOR_REPO_TAG_NAME}-x86_64-pc-windows-msvc"
         New-Item -Path $NAME -ItemType directory
         Copy-Item target/release/wasm-pack.exe "${NAME}/"
-        Copy-Item target/release/wasm-pack.exe wasm-pack-x86_64-pc-windows-msvc.exe
+        Copy-Item target/release/wasm-pack.exe wasm-pack-init.exe
         Copy-Item LICENSE-MIT "${NAME}/"
         Copy-Item LICENSE-APACHE "${NAME}/"
         Copy-Item README.md "${NAME}/"
         7z a -ttar "${NAME}.tar" "${NAME}"
         7z a "${NAME}.tar.gz" "${NAME}.tar"
         Push-AppveyorArtifact "${NAME}.tar.gz"
-        Push-AppveyorArtifact wasm-pack-x86_64-pc-windows-msvc.exe
+        Push-AppveyorArtifact wasm-pack-init.exe
 
 deploy:
   artifact: /.*\.tar.gz/, /.*\.exe/

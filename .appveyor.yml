@@ -38,6 +38,6 @@ deploy:
   draft: false
   prerelease: false
   auth_token:
-    secure: iHsRUqwGf/Zh7OuYpHOWQL8buaOL+c8/6kXLRly8V2j0LCUo7CcDs0NxQ0vl2bhZ
+    secure: +LNT7fGfTLG4pll3My72Hj/INAFBmXWQu3/mjDTBjbMoJpWxXiFiKk/Tq2awdHgx
   on:
     appveyor_repo_tag: true
